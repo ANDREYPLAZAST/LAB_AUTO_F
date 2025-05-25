@@ -1,0 +1,23 @@
+{
+  "name": "tank-monitoring-backend",
+  "version": "1.0.0",
+  "description": "Backend for tank monitoring system with PLC integration",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "python-shell": "^5.0.0",
+    "recharts": "^2.15.3"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22"
+  }
+}

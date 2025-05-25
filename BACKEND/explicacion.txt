@@ -1,0 +1,73 @@
+SISTEMA DE MONITOREO Y CONTROL DE PROCESOS
+
+1. LECTURA Y MONITOREO DEL PLC
+--------------------------------
+- El sistema realiza lecturas constantes del PLC cada 100ms
+- Variables monitoreadas:
+  * Nivel de referencia del tanque (referencia_nivel_tanque_cm)
+  * Nivel actual del tanque (nivel_actual_tanque_cm)
+  * Velocidad de la bomba (rpms_bomba)
+  * Estados de los botones (start, stop, paro de emergencia, confirmar)
+
+2. GESTIÓN INTELIGENTE DE DATOS
+--------------------------------
+- Sistema de almacenamiento optimizado:
+  * Compara cada nueva lectura con la anterior
+  * Solo guarda nuevos registros cuando detecta cambios reales
+  * Si no hay cambios, actualiza el último registro existente
+  * Mantiene un historial significativo de cambios
+
+3. CONTROL DE SETPOINTS
+--------------------------------
+- Monitoreo del botón de confirmar:
+  * Cuando está activo (valor 1), guarda el valor actual como nuevo setpoint
+  * Registra hora y origen (PLC) del setpoint
+- Control desde interfaz web:
+  * Permite modificar setpoints desde el frontend
+  * Escribe nuevos valores en el PLC
+  * Guarda setpoints con origen 'frontend'
+
+4. GESTIÓN DE BOTONES
+--------------------------------
+- Monitoreo constante de estados:
+  * Botón Start
+  * Botón Stop
+  * Botón de Paro de Emergencia
+- Acciones al detectar cambios:
+  * Escribe nuevos estados en el PLC
+  * Guarda estados en base de datos
+  * Mantiene historial de cambios
+
+5. ESTRUCTURA DE DATOS
+--------------------------------
+Colecciones en MongoDB:
+1. Datos_monitoreo
+   - Registros de lecturas del PLC
+   - Historial de cambios significativos
+2. Setpoint
+   - Valores de referencia establecidos
+   - Origen de cada setpoint
+3. Estados_botones
+   - Historial de estados de los botones
+   - Registro de cambios
+
+6. OPTIMIZACIÓN DEL SISTEMA
+--------------------------------
+- Lectura eficiente (100ms)
+- Almacenamiento selectivo
+- Monitoreo en tiempo real
+- Comunicación bidireccional PLC
+- Minimización de datos duplicados
+
+7. SEGURIDAD Y ROBUSTEZ
+--------------------------------
+- Manejo de errores en todas las operaciones
+- Verificación de conexión con el PLC
+- Validación de datos antes de guardar
+- Registro de eventos y errores
+- Sistema de respaldo de datos
+
+Este sistema proporciona un monitoreo en tiempo real del proceso industrial,
+manteniendo un historial significativo de cambios y permitiendo el control
+tanto desde el PLC como desde la interfaz web, optimizando el uso de recursos
+y asegurando la integridad de los datos.
